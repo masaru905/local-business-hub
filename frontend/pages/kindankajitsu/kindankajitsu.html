@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="中目黒の住宅街に佇く、地元同級生2人が作るフルーツサンド専門店。大田市場から当日朝に仕入れた旬のフルーツを、毎朝焼き上げた厚切りパンに挟んで。禁断果実 kindankajitsu。">
+  <title>禁断果実 | kindankajitsu — 中目黒のフルーツサンド専門店</title>
+
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== VARIABLES ===== */
+    :root {
+      --black:      #0d0c0b;
+      --charcoal:   #1a1917;
+      --dark-mid:   #2c2a27;
+      --gold:       #c8a24a;
+      --gold-light: #e8c97a;
+      --red:        #c23b2a;
+      --cream:      #f5f0e8;
+      --white:      #ffffff;
+      --text-muted: #888880;
+
+      --fs-xs:   0.70rem;
+      --fs-sm:   0.865rem;
+      --fs-base: 1rem;
+      --fs-md:   1.15rem;
+      --fs-lg:   1.5rem;
+      --fs-hero: clamp(3rem, 11vw, 6.5rem);
+
+      --radius-sm:   4px;
+      --radius-md:   10px;
+      --radius-lg:   20px;
+      --radius-pill: 999px;
+
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      background: var(--black);
+      color: var(--cream);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== UTILITY ===== */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .label {
+      font-size: var(--fs-xs);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.2rem;
+    }
+    .label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== TOP BAR ===== */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(13,12,11,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,162,74,0.18);
+      transition: box-shadow var(--transition);
+    }
+    .topbar__logo {
+      font-size: var(--fs-sm);
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .topbar__cta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--gold);
+      color: var(--black);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition);
+    }
+    .topbar__cta:active { background: var(--gold-light); }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding-top: 52px;
+    }
+
+    /* split layout: top = photo mosaic, bottom = text */
+    .hero__visual {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2px;
+      min-height: 55svh;
+    }
+    .hero__visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.82) contrast(1.08) saturate(1.1);
+    }
+    .hero__visual img:first-child { grid-row: span 2; }
+    .hero__visual img:last-child { filter: brightness(0.72) contrast(1.1); }
+
+    /* diagonal slash overlay */
+    .hero__slash {
+      position: absolute;
+      bottom: 38%;
+      left: 0; right: 0;
+      height: 80px;
+      background: var(--black);
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+      pointer-events: none;
+    }
+
+    .hero__content {
+      background: var(--black);
+      padding: 32px 24px 52px;
+      position: relative;
+    }
+
+    .hero__eyebrow {
+      font-size: var(--fs-xs);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero__eyebrow::before {
+      content: '🍎';
+      font-size: 0.9rem;
+      letter-spacing: 0;
+    }
+
+    .hero__title {
+      font-size: var(--fs-hero);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      color: var(--white);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .hero__title span {
+      display: block;
+      color: var(--gold);
+      font-size: 0.32em;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      margin-bottom: 6px;
+    }
+
+    .hero__tagline {
+      font-size: var(--fs-sm);
+      line-height: 1.8;
+      color: rgba(245,240,232,0.72);
+      margin-bottom: 28px;
+      max-width: 28ch;
+    }
+
+    .hero__badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid rgba(200,162,74,0.4);
+      color: var(--gold-light);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* ===== OPENING HOOK ===== */
+    .hook {
+      background: var(--gold);
+      color: var(--black);
+      padding: 22px 20px;
+      text-align: center;
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+    }
+    .hook em {
+      font-style: normal;
+      font-size: 1.15em;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      padding: 56px 0 40px;
+      background: var(--charcoal);
+    }
+    .gallery__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .gallery__row {
+      display: grid;
+      gap: 3px;
+    }
+    .gallery__row--2col   { grid-template-columns: 1fr 1fr; }
+    .gallery__row--3col   { grid-template-columns: 1fr 1fr 1fr; }
+    .gallery__row--wide   { grid-template-columns: 2fr 1fr; }
+    .gallery__row--1col   { grid-template-columns: 1fr; }
+
+    .gallery__item {
+      overflow: hidden;
+      background: var(--dark-mid);
+    }
+    .gallery__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.3s ease;
+      filter: brightness(0.9) saturate(1.1);
+    }
+    .gallery__item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1) saturate(1.2);
+    }
+    .gallery__item--sq   { aspect-ratio: 1; }
+    .gallery__item--tall { aspect-ratio: 3/4; }
+    .gallery__item--wide { aspect-ratio: 4/3; }
+    .gallery__item--land { aspect-ratio: 16/9; }
+
+    .gallery__note {
+      margin-top: 18px;
+      text-align: center;
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+    }
+
+    /* ===== STORY ===== */
+    .story {
+      padding: 72px 0 60px;
+      background: var(--black);
+    }
+    .story__lead {
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+      color: rgba(245,240,232,0.88);
+      margin-bottom: 48px;
+    }
+    .story__lead strong {
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    .points {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .point {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(200,162,74,0.15);
+      padding: 24px 0;
+    }
+    .point:last-child { border-bottom: 1px solid rgba(200,162,74,0.15); }
+    .point__num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: rgba(200,162,74,0.22);
+      line-height: 1;
+      padding-top: 3px;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+    .point__body {}
+    .point__title {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+    .point__text {
+      font-size: var(--fs-sm);
+      color: rgba(245,240,232,0.65);
+      line-height: 1.8;
+    }
+
+    /* ===== MENU HIGHLIGHT ===== */
+    .menu-section {
+      padding: 56px 0 60px;
+      background: var(--charcoal);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .menu-card {
+      background: var(--dark-mid);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(200,162,74,0.12);
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .menu-card:hover {
+      border-color: rgba(200,162,74,0.4);
+      transform: translateY(-3px);
+    }
+    .menu-card__img {
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+    .menu-card__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .menu-card:hover .menu-card__img img { transform: scale(1.06); }
+    .menu-card__body { padding: 14px 14px 16px; }
+    .menu-card__name {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 4px;
+      letter-spacing: 0.03em;
+    }
+    .menu-card__desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .menu-card__price {
+      margin-top: 8px;
+      font-size: var(--fs-xs);
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    /* sold-out tag */
+    .menu-card--hot .menu-card__name::after {
+      content: '🔥 人気';
+      font-size: 0.65rem;
+      background: var(--red);
+      color: var(--white);
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      margin-left: 6px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+    }
+
+    /* ===== SCENE ===== */
+    .scene-section {
+      padding: 56px 0 60px;
+      background: var(--black);
+    }
+    .scene-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .scene-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      align-items: center;
+      background: var(--charcoal);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(200,162,74,0.1);
+    }
+    .scene-item__img {
+      height: 100px;
+      overflow: hidden;
+    }
+    .scene-item__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .scene-item__body { padding: 14px 16px 14px 0; }
+    .scene-item__title {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .scene-item__text {
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.65;
+    }
+
+    /* ===== REVIEWS ===== */
+    .review-section {
+      padding: 56px 0;
+      background: var(--charcoal);
+    }
+    .review-scroll-wrap {
+      position: relative;
+      margin-top: 24px;
+    }
+    .review-scroll-wrap::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0;
+      width: 48px; height: 100%;
+      background: linear-gradient(to right, transparent, var(--charcoal));
+      pointer-events: none;
+    }
+    .review-scroll {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .review-scroll::-webkit-scrollbar { display: none; }
+    .review-card {
+      flex: 0 0 min(78vw, 270px);
+      scroll-snap-align: start;
+      background: var(--dark-mid);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      border: 1px solid rgba(200,162,74,0.15);
+    }
+    .review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 10px; }
+    .review-text { font-size: var(--fs-sm); color: rgba(245,240,232,0.72); line-height: 1.75; }
+    .review-author { margin-top: 12px; font-size: var(--fs-xs); color: var(--gold); letter-spacing: 0.1em; }
+
+    /* ===== INFO ===== */
+    .info-section {
+      padding: 56px 0 60px;
+      background: var(--black);
+    }
+    .info-table {
+      margin-top: 28px;
+      border: 1px solid rgba(200,162,74,0.2);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .info-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      border-bottom: 1px solid rgba(200,162,74,0.12);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      background: var(--charcoal);
+      padding: 16px 12px;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(200,162,74,0.12);
+      display: flex;
+      align-items: flex-start;
+      padding-top: 18px;
+    }
+    .info-val {
+      background: var(--dark-mid);
+      padding: 16px 16px;
+      font-size: var(--fs-sm);
+      color: rgba(245,240,232,0.8);
+      line-height: 1.75;
+    }
+    .info-val small { display: block; color: var(--text-muted); font-size: var(--fs-xs); margin-top: 3px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(200,162,74,0.35);
+      color: var(--gold-light);
+      font-size: var(--fs-xs);
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      margin: 4px 3px 0 0;
+    }
+
+    /* access note */
+    .access-note {
+      margin-top: 16px;
+      background: var(--charcoal);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 12px 16px;
+      font-size: var(--fs-xs);
+      color: rgba(245,240,232,0.65);
+      line-height: 1.7;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      padding: 72px 0 80px;
+      background: var(--charcoal);
+      text-align: center;
+    }
+    .cta__overline {
+      font-size: var(--fs-xs);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .cta__heading {
+      font-size: clamp(1.6rem, 6vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .cta__heading em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .cta__sub {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .cta__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--black);
+      font-size: var(--fs-sm);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 17px 36px;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition), transform var(--transition);
+      box-shadow: 0 4px 24px rgba(200,162,74,0.28);
+      width: 100%;
+      max-width: 320px;
+    }
+    .cta__btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .cta__btn:active { transform: translateY(0); }
+    .cta__tel {
+      margin-top: 20px;
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+    }
+    .cta__tel a { color: var(--gold); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(200,162,74,0.12);
+      padding: 32px 20px;
+      text-align: center;
+      font-size: var(--fs-xs);
+      color: rgba(245,240,232,0.3);
+      letter-spacing: 0.1em;
+      line-height: 2;
+    }
+    footer .fn { color: rgba(245,240,232,0.65); font-size: var(--fs-sm); margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar" role="banner">
+    <span class="topbar__logo">禁断果実</span>
+    <a href="https://maps.google.com/?cid=2472637044580109121"
+       target="_blank" rel="noopener"
+       class="topbar__cta"
+       aria-label="Googleマップで見る">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      地図を見る
+    </a>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero" aria-label="ファーストビュー">
+    <div class="hero__visual" aria-hidden="true">
+      <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_ec60f1fd8f706badbf07b37905fe9836.jpg"
+           alt="フルーツサンドの断面" loading="eager">
+      <img src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_6337d3532f9922ff36660cc5bf1295b3.jpg"
+           alt="カフェラテ" loading="eager">
+      <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_da11007c86801236ede7a45eb7a93342.jpg"
+           alt="店内の様子" loading="eager">
+    </div>
+    <div class="hero__slash" aria-hidden="true"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Nakameguro · Since 2021</p>
+      <h1 class="hero__title">
+        <span>Kindan Kajitsu</span>
+        禁断果実
+      </h1>
+      <p class="hero__tagline">
+        大田市場から届く、<br>その日の朝だけの果実を。<br>地元の同級生2人が作るサンドイッチ。
+      </p>
+      <div class="hero__badges" role="list" aria-label="店舗の特徴">
+        <span class="badge" role="listitem">🕗 朝8時〜</span>
+        <span class="badge" role="listitem">🐾 ペット可</span>
+        <span class="badge" role="listitem">🥡 テイクアウト可</span>
+        <span class="badge" role="listitem">📶 Wi-Fi完備</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- HOOK -->
+  <div class="hook" role="complementary">
+    <em>看板メニューは午前中に売り切れることも。</em><br>
+    早めの来店がおすすめです。
+  </div>
+
+
+  <!-- GALLERY -->
+  <section class="gallery reveal" aria-labelledby="gallery-label">
+    <div class="container">
+      <p class="label" id="gallery-label">Gallery</p>
+    </div>
+    <div class="gallery__grid" role="list" aria-label="メニュー・店内写真">
+      <div class="gallery__row gallery__row--2col" role="listitem">
+        <div class="gallery__item gallery__item--wide">
+          <img src="https://tblg.k-img.com/restaurant/images/Rvw/304291/640x640_rect_c4aaa6722c0eb298aa700ec993bbd411.jpg"
+               alt="ミックスフルーツサンド" loading="lazy">
+        </div>
+        <div class="gallery__item gallery__item--wide">
+          <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_1e4454dd0b23a7e2d23617d901df6c21.jpg"
+               alt="フルーツサンドの断面アップ" loading="lazy">
+        </div>
+      </div>
+      <div class="gallery__row gallery__row--3col" role="listitem">
+        <div class="gallery__item gallery__item--sq">
+          <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_919cfcf954546bb7bb24422793e656c3.jpg"
+               alt="ホットサンド" loading="lazy">
+        </div>
+        <div class="gallery__item gallery__item--sq">
+          <img src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_fbb4389430f2f7518256d53b62562932.jpg"
+               alt="コーヒー" loading="lazy">
+        </div>
+        <div class="gallery__item gallery__item--sq">
+          <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_093ab29b3dc3c1e48d7f9a0589cf5703.jpg"
+               alt="サンドイッチと飲み物のセット" loading="lazy">
+        </div>
+      </div>
+      <div class="gallery__row gallery__row--1col" role="listitem">
+        <div class="gallery__item gallery__item--land">
+          <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_2c6cf6e4a9e25e87f670a14b6e21a78c.jpg"
+               alt="黒を基調とした店内" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <p class="gallery__note">写真はすべてお客様によるレビュー画像です</p>
+    </div>
+  </section>
+
+
+  <!-- STORY -->
+  <section class="story reveal" aria-labelledby="story-label">
+    <div class="container">
+      <p class="label" id="story-label">Our Story</p>
+      <p class="story__lead">
+        中目黒で育った<strong>地元の同級生2人</strong>が、
+        2021年に立ち上げたサンドイッチ専門店。<br>
+        フルーツは<strong>大田市場から当日朝に直接仕入れ</strong>、
+        その日のうちに使い切る。<br>
+        シンプルだけど、妥協しない仕事。
+      </p>
+
+      <ul class="points" role="list">
+        <li class="point reveal" role="listitem">
+          <span class="point__num" aria-hidden="true">01</span>
+          <div class="point__body">
+            <p class="point__title">当日仕入れの旬フルーツ</p>
+            <p class="point__text">大田市場から毎朝直送。入荷したその日の朝に厚くスライスし、パンに挟む。旬のフルーツが持つ本来の甘さと香りを、余計な加工なしに届けます。</p>
+          </div>
+        </li>
+        <li class="point reveal" role="listitem">
+          <span class="point__num" aria-hidden="true">02</span>
+          <div class="point__body">
+            <p class="point__title">看板メニューはすぐ売り切れる</p>
+            <p class="point__text">りんごをキャラメリゼし、ナッツとシナモンを合わせた「禁断果実フルーツサンド」は毎朝数量限定。午前中の来店が確実です。</p>
+          </div>
+        </li>
+        <li class="point reveal" role="listitem">
+          <span class="point__num" aria-hidden="true">03</span>
+          <div class="point__body">
+            <p class="point__title">朝8時から始まる一日</p>
+            <p class="point__text">通勤前のモーニングから、ゆっくりしたランチまで対応。ドリンクのラストオーダーは17:30と、夕方の休憩にも使えます。</p>
+          </div>
+        </li>
+        <li class="point reveal" role="listitem">
+          <span class="point__num" aria-hidden="true">04</span>
+          <div class="point__body">
+            <p class="point__title">ペット・子連れ・テイクアウト全部OK</p>
+            <p class="point__text">キャリーケースのペット同伴可。中学生以下にはりんごジュースのサービスあり。テイクアウトや大量注文・自社配送にも対応しています。</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- MENU -->
+  <section class="menu-section reveal" aria-labelledby="menu-label">
+    <div class="container">
+      <p class="label" id="menu-label">Menu</p>
+      <div class="menu-grid" role="list" aria-label="主要メニュー">
+        <article class="menu-card menu-card--hot reveal" role="listitem">
+          <div class="menu-card__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_0f4cdaea655ef21d7f2686774266690d.jpg"
+                 alt="禁断果実フルーツサンド" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <p class="menu-card__name">禁断果実フルーツサンド</p>
+            <p class="menu-card__desc">りんごのキャラメリゼ×キャラメリゼナッツ×シナモン。店名を冠した看板作。</p>
+            <p class="menu-card__price">¥600〜</p>
+          </div>
+        </article>
+        <article class="menu-card reveal" role="listitem">
+          <div class="menu-card__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_919cfcf954546bb7bb24422793e656c3.jpg"
+                 alt="ホットサンド エルビス" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <p class="menu-card__name">ホットサンド</p>
+            <p class="menu-card__desc">バナナとベーコンの「エルビス」など、個性的なラインナップ。</p>
+            <p class="menu-card__price">¥800〜</p>
+          </div>
+        </article>
+        <article class="menu-card reveal" role="listitem">
+          <div class="menu-card__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/241173/640x640_b1db303ad639236b4b0c83b0ccb9cca2.jpg"
+                 alt="Kindan Pudding" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <p class="menu-card__name">Kindan Pudding</p>
+            <p class="menu-card__desc">なめらかな自家製プリン。コーヒーとのセットが人気。</p>
+            <p class="menu-card__price">¥500</p>
+          </div>
+        </article>
+        <article class="menu-card reveal" role="listitem">
+          <div class="menu-card__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/303534/640x640_rect_10ec3d6eb9521fce885a2ab0833b60cc.jpg"
+                 alt="チキンオーバーライス" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <p class="menu-card__name">チキンオーバーライス</p>
+            <p class="menu-card__desc">がっつり食べたいランチに。ボリューム満点の一皿。</p>
+            <p class="menu-card__price">¥1,100〜</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SCENE -->
+  <section class="scene-section reveal" aria-labelledby="scene-label">
+    <div class="container">
+      <p class="label" id="scene-label">こんな日に</p>
+      <ul class="scene-list" role="list">
+        <li class="scene-item reveal" role="listitem">
+          <div class="scene-item__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_6337d3532f9922ff36660cc5bf1295b3.jpg"
+                 alt="モーニングコーヒー" loading="lazy">
+          </div>
+          <div class="scene-item__body">
+            <p class="scene-item__title">🕗 出勤前の朝ごはん</p>
+            <p class="scene-item__text">朝8時から営業。コーヒーとサンドイッチで、いい一日のはじまりを。</p>
+          </div>
+        </li>
+        <li class="scene-item reveal" role="listitem">
+          <div class="scene-item__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/300808/640x640_rect_565941384b6a1e62b1ff67e6ce9b752a.jpg"
+                 alt="テイクアウトサンド" loading="lazy">
+          </div>
+          <div class="scene-item__body">
+            <p class="scene-item__title">🥡 公園でテイクアウト</p>
+            <p class="scene-item__text">中目黒の目黒川沿いへ持ち出しても。ペットのお散歩がてらにも。</p>
+          </div>
+        </li>
+        <li class="scene-item reveal" role="listitem">
+          <div class="scene-item__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_fb87539a654cfe40be961ef0ee12a0f0.jpg"
+                 alt="電源でリモートワーク" loading="lazy">
+          </div>
+          <div class="scene-item__body">
+            <p class="scene-item__title">💻 ちょっとした作業に</p>
+            <p class="scene-item__text">無料Wi-Fi・電源完備。コーヒー片手に集中できる空間。</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- REVIEWS -->
+  <section class="review-section reveal" aria-labelledby="review-label">
+    <div class="container">
+      <p class="label" id="review-label">口コミ</p>
+    </div>
+    <div class="review-scroll-wrap" role="region" aria-label="お客様の声">
+      <div class="review-scroll">
+        <article class="review-card">
+          <div class="review-stars" aria-label="星5">★★★★★</div>
+          <p class="review-text">フルーツサンドが人気のお店。休日17時頃に行くと空いていましたが、ほどなくして満席に。フルーツサンドはもちろん、ホットサンドも個性的で好きです。</p>
+          <p class="review-author">— 食べログ レビューより</p>
+        </article>
+        <article class="review-card">
+          <div class="review-stars" aria-label="星4">★★★★☆</div>
+          <p class="review-text">【禁断果実】さんでモーニング。重厚な扉が閉まっていて一瞬ひるみましたが営業中でした。バナナとベーコンのホットサンド「エルビス」が絶品。また来ます。</p>
+          <p class="review-author">— 食べログ レビューより</p>
+        </article>
+        <article class="review-card">
+          <div class="review-stars" aria-label="星5">★★★★★</div>
+          <p class="review-text">Kindan Pudding ¥500 と Cafe Latte ¥600 で朝のひとときを。電子マネーも使えて便利。黒い外観がかっこよくて、一人でも入りやすい雰囲気。</p>
+          <p class="review-author">— 食べログ レビューより</p>
+        </article>
+        <article class="review-card">
+          <div class="review-stars" aria-label="星5">★★★★★</div>
+          <p class="review-text">中目黒の住宅街に突如現れるモダンなカフェ。フルーツサンドの断面が美しくて、思わず写真を撮りたくなります。地元の人に混じって食べる感じが好き。</p>
+          <p class="review-author">— Google マップ レビューより</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- INFO -->
+  <section class="info-section reveal" aria-labelledby="info-label">
+    <div class="container">
+      <p class="label" id="info-label">店舗情報</p>
+      <div class="info-table" role="table" aria-label="基本情報">
+        <div class="info-row" role="row">
+          <span class="info-key" role="rowheader">営業</span>
+          <div class="info-val" role="cell">
+            08:00 – 18:00<br>
+            <small>L.O. 料理17:00 / ドリンク17:30</small>
+            <small>定休日：火曜（祝日の場合は営業）</small>
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-key" role="rowheader">場所</span>
+          <div class="info-val" role="cell">
+            東京都目黒区中目黒 2-7-7 1F<br>
+            <small>中目黒駅より徒歩約13分 / バス「目黒警察署前」徒歩1分</small>
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-key" role="rowheader">価格</span>
+          <div class="info-val" role="cell">
+            ¥1,000 〜 ¥1,999<br>
+            <small>1ドリンクオーダー制（店内利用）</small>
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-key" role="rowheader">席数</span>
+          <div class="info-val" role="cell">
+            15席（カウンター席あり）
+            <br>
+            <span class="chip">全席禁煙</span>
+            <span class="chip">Wi-Fi</span>
+            <span class="chip">電源</span>
+            <span class="chip">バリアフリー</span>
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-key" role="rowheader">支払</span>
+          <div class="info-val" role="cell">
+            <span class="chip">カード可</span>
+            <span class="chip">交通系IC</span>
+            <span class="chip">PayPay他</span>
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-key" role="rowheader">TEL</span>
+          <div class="info-val" role="cell">
+            <a href="tel:08023498056" style="color:var(--gold);font-weight:700;">080-2349-8056</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="access-note" role="note">
+        📍 中目黒駅からは少し歩きます（約13分）。バスを使う場合は「目黒警察署前」が最寄り停留所（徒歩1分）。目黒警察署を目印にトリミングサロン角を曲がるとすぐです。
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section class="cta reveal" aria-labelledby="cta-label">
+    <div class="container">
+      <p class="cta__overline">Find us</p>
+      <h2 class="cta__heading" id="cta-label">
+        朝8時、<em>今日の果実</em>が<br>届いています。
+      </h2>
+      <p class="cta__sub">
+        大田市場から届いた旬のフルーツは、<br>
+        その日の朝だけのもの。
+      </p>
+      <a href="https://maps.google.com/?cid=2472637044580109121"
+         target="_blank" rel="noopener"
+         class="cta__btn"
+         aria-label="Googleマップで禁断果実を表示する">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Googleマップで見る
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <p class="cta__tel">お問い合わせ <a href="tel:08023498056">080-2349-8056</a></p>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <p class="fn">禁断果実 / kindankajitsu</p>
+    <p>東京都目黒区中目黒 2-7-7 1F</p>
+    <p>中目黒駅より徒歩約13分</p>
+    <p style="margin-top:14px;font-size:0.62rem;opacity:0.35;">
+      このページは来店意思決定支援を目的として作成されました。<br>
+      営業時間や定休日は変更の場合がございます。訪問前にご確認ください。
+    </p>
+  </footer>
+
+  <script>
+    'use strict';
+
+    // reveal on scroll
+    (function() {
+      const els = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), 55 * (i % 4));
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
+      els.forEach(el => obs.observe(el));
+    })();
+
+    // topbar shadow
+    (function() {
+      const bar = document.querySelector('.topbar');
+      window.addEventListener('scroll', () => {
+        bar.style.boxShadow = window.scrollY > 30
+          ? '0 2px 16px rgba(0,0,0,0.5)'
+          : 'none';
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

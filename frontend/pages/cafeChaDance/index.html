@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="中目黒の緑道沿いに佇む、器と出会えるお茶会カフェ。好きな器を選んで、自分だけのお茶時間を。うつわカフェ茶簞笥 Café Cha Dance の公式紹介ページ。">
+  <title>うつわカフェ茶簞笥 | Café Cha Dance — 中目黒</title>
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --ink:        #1c1a18;
+      --paper:      #f7f4ef;
+      --cream:      #ede9e0;
+      --warm-mid:   #c8a87a;
+      --warm-deep:  #8c6840;
+      --sage:       #7a8c72;
+      --accent:     #c04e3a;
+      --white:      #ffffff;
+
+      --fs-xs:   0.72rem;
+      --fs-sm:   0.875rem;
+      --fs-base: 1rem;
+      --fs-md:   1.15rem;
+      --fs-lg:   1.5rem;
+      --fs-xl:   2rem;
+      --fs-2xl:  2.8rem;
+      --fs-hero: clamp(2.4rem, 9vw, 5.5rem);
+
+      --radius-sm: 4px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+
+      --shadow-soft: 0 4px 24px rgba(28,26,24,0.10);
+      --shadow-card: 0 2px 16px rgba(28,26,24,0.08);
+
+      --transition: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== UTILITY ===== */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm-deep);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.2rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--warm-mid);
+      opacity: 0.5;
+      max-width: 60px;
+    }
+
+    /* ===== FADE-IN ON SCROLL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== HEADER STRIP ===== */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(247,244,239,0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,168,122,0.22);
+    }
+    .top-bar__name {
+      font-size: var(--fs-sm);
+      letter-spacing: 0.06em;
+      font-weight: 400;
+      color: var(--warm-deep);
+    }
+    .top-bar__map-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      color: var(--white);
+      background: var(--warm-deep);
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition);
+    }
+    .top-bar__map-btn:active { background: var(--ink); }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 580px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(28,26,24,0.08) 0%,
+          rgba(28,26,24,0.05) 40%,
+          rgba(28,26,24,0.68) 100%
+        );
+      z-index: 1;
+    }
+
+    /* mosaic photo grid as hero background */
+    .hero__photos {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+    }
+    .hero__photos img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.92) saturate(1.05);
+    }
+    .hero__photos img:first-child {
+      grid-row: span 2;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 0 24px 48px;
+      color: var(--white);
+    }
+    .hero__en-sub {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0.78;
+      margin-bottom: 10px;
+    }
+    .hero__title {
+      font-size: var(--fs-hero);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+    }
+    .hero__title small {
+      display: block;
+      font-size: clamp(1rem, 3.5vw, 1.6rem);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+    .hero__tagline {
+      font-size: var(--fs-sm);
+      line-height: 1.65;
+      opacity: 0.90;
+      max-width: 26ch;
+      margin-bottom: 28px;
+    }
+    .hero__scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.18em;
+      opacity: 0.6;
+    }
+    .hero__scroll-line {
+      width: 32px;
+      height: 1px;
+      background: var(--white);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { width: 32px; opacity: 0.6; }
+      50% { width: 52px; opacity: 1; }
+    }
+
+    /* ===== INTRO RIBBON ===== */
+    .ribbon {
+      background: var(--warm-deep);
+      color: var(--white);
+      padding: 18px 20px;
+      text-align: center;
+      font-size: var(--fs-sm);
+      letter-spacing: 0.12em;
+      line-height: 1.65;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-section {
+      padding: 64px 0 48px;
+      background: var(--cream);
+    }
+    .gallery-section .container {
+      max-width: 720px;
+    }
+    .gallery-grid {
+      display: grid;
+      gap: 6px;
+    }
+    .gallery-grid__row {
+      display: grid;
+      gap: 6px;
+    }
+    .gallery-grid__row--3 { grid-template-columns: 1fr 1fr 1fr; }
+    .gallery-grid__row--2 { grid-template-columns: 2fr 1fr; }
+    .gallery-grid__row--2r { grid-template-columns: 1fr 2fr; }
+    .gallery-grid__row--1 { grid-template-columns: 1fr; }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+      background: var(--cream);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-item--tall { aspect-ratio: 3/4; }
+    .gallery-item--square { aspect-ratio: 1; }
+    .gallery-item--wide { aspect-ratio: 4/3; }
+    .gallery-item--landscape { aspect-ratio: 16/9; }
+
+    /* caption strip */
+    .gallery-caption {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.18em;
+      color: var(--warm-deep);
+    }
+    .gallery-caption span { opacity: 0.55; }
+
+    /* ===== FEATURES / INTRO ===== */
+    .intro-section {
+      padding: 72px 0 56px;
+      background: var(--paper);
+    }
+    .intro-lead {
+      font-size: var(--fs-md);
+      line-height: 2;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .intro-lead::before {
+      content: '「';
+      position: absolute;
+      top: -0.3em;
+      left: -0.5em;
+      font-size: 3em;
+      color: var(--warm-mid);
+      opacity: 0.35;
+      font-family: 'Hiragino Mincho ProN', serif;
+      line-height: 1;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+    .feature-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1.5px solid var(--warm-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .feature-title {
+      font-size: var(--fs-base);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      color: var(--warm-deep);
+    }
+    .feature-body {
+      font-size: var(--fs-sm);
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* ===== ATMOSPHERE / SCENE ===== */
+    .scene-section {
+      padding: 64px 0;
+      background: var(--cream);
+    }
+    .scene-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .scene-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: var(--shadow-card);
+    }
+    .scene-card__img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .scene-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .scene-card:hover .scene-card__img img { transform: scale(1.05); }
+    .scene-card__body {
+      padding: 14px 16px 16px;
+    }
+    .scene-card__title {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      color: var(--warm-deep);
+    }
+    .scene-card__text {
+      font-size: 0.78rem;
+      color: #666;
+      line-height: 1.65;
+    }
+
+    /* large span card */
+    .scene-card--wide {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .scene-card--wide .scene-card__img {
+      aspect-ratio: unset;
+      min-height: 200px;
+    }
+    .scene-card--wide .scene-card__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 22px;
+    }
+
+    /* ===== REVIEW STRIP ===== */
+    .review-section {
+      padding: 64px 0;
+      background: var(--paper);
+    }
+    .review-track {
+      overflow: hidden;
+      margin-top: 24px;
+      position: relative;
+    }
+    .review-track::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 48px; height: 100%;
+      background: linear-gradient(to right, transparent, var(--paper));
+      pointer-events: none;
+    }
+    .review-scroll {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .review-scroll::-webkit-scrollbar { display: none; }
+    .review-card {
+      flex: 0 0 min(80vw, 280px);
+      scroll-snap-align: start;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 20px 18px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(200,168,122,0.2);
+    }
+    .review-stars {
+      color: var(--warm-mid);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .review-text {
+      font-size: var(--fs-sm);
+      line-height: 1.75;
+      color: #444;
+    }
+    .review-author {
+      margin-top: 12px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      color: var(--warm-deep);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== INFO TABLE ===== */
+    .info-section {
+      padding: 64px 0;
+      background: var(--cream);
+    }
+    .info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(200,168,122,0.35);
+      margin-top: 28px;
+    }
+    .info-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 0;
+      background: var(--white);
+      border-bottom: 1px solid rgba(200,168,122,0.2);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row:nth-child(even) { background: var(--paper); }
+    .info-label {
+      padding: 16px 14px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      color: var(--warm-deep);
+      font-weight: 600;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(200,168,122,0.25);
+      display: flex;
+      align-items: flex-start;
+      padding-top: 18px;
+    }
+    .info-value {
+      padding: 16px 16px;
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      color: var(--ink);
+    }
+    .info-value strong {
+      display: block;
+      color: var(--warm-deep);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin-bottom: 2px;
+    }
+    .info-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--cream);
+      border: 1px solid var(--warm-mid);
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-xs);
+      padding: 3px 10px;
+      color: var(--warm-deep);
+      margin-top: 6px;
+      margin-right: 4px;
+    }
+
+    /* ===== RATING STRIP ===== */
+    .rating-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0 0;
+      background: var(--white);
+      border: 1px solid rgba(200,168,122,0.3);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+    }
+    .rating-number {
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--warm-deep);
+      font-family: 'Georgia', serif;
+    }
+    .rating-details {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .rating-stars { color: var(--warm-mid); font-size: 1rem; letter-spacing: 0.08em; }
+    .rating-meta {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      color: #888;
+      letter-spacing: 0.08em;
+    }
+    .rating-badge {
+      margin-left: auto;
+      background: var(--sage);
+      color: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    /* ===== MAP CTA ===== */
+    .cta-section {
+      padding: 72px 0 80px;
+      background: var(--paper);
+      text-align: center;
+    }
+    .cta-eyebrow {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm-mid);
+      margin-bottom: 16px;
+    }
+    .cta-heading {
+      font-size: var(--fs-xl);
+      line-height: 1.4;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+    }
+    .cta-sub {
+      font-size: var(--fs-sm);
+      color: #888;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .cta-map-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: var(--radius-pill);
+      padding: 17px 36px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-sm);
+      letter-spacing: 0.12em;
+      transition: background var(--transition), transform var(--transition);
+      box-shadow: 0 4px 20px rgba(28,26,24,0.18);
+      text-decoration: none;
+      width: 100%;
+      max-width: 320px;
+    }
+    .cta-map-btn:hover, .cta-map-btn:focus {
+      background: var(--warm-deep);
+      transform: translateY(-2px);
+    }
+    .cta-map-btn:active { transform: translateY(0); }
+    .cta-map-icon {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .cta-tel {
+      margin-top: 20px;
+      font-size: var(--fs-sm);
+      color: #999;
+    }
+    .cta-tel a { color: var(--warm-deep); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 32px 20px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      line-height: 1.9;
+    }
+    footer .footer-name {
+      color: rgba(255,255,255,0.85);
+      font-size: var(--fs-sm);
+      margin-bottom: 6px;
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 auto;
+      max-width: 200px;
+      padding: 32px 0 0;
+      opacity: 0.4;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--warm-mid);
+    }
+    .divider__ornament {
+      font-size: 1rem;
+      color: var(--warm-mid);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 400px) {
+      .scene-grid { grid-template-columns: 1fr; }
+      .scene-card--wide { grid-column: unset; grid-template-columns: 1fr; }
+      .scene-card--wide .scene-card__img { min-height: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="top-bar" role="banner">
+    <span class="top-bar__name">うつわカフェ茶簞笥</span>
+    <a href="https://maps.google.com/?cid=4886293058874782473"
+       target="_blank" rel="noopener"
+       class="top-bar__map-btn"
+       aria-label="Googleマップで見る">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      地図を見る
+    </a>
+  </header>
+
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="ファーストビュー">
+    <!-- Photo mosaic grid -->
+    <div class="hero__photos" aria-hidden="true">
+      <img src="https://tblg.k-img.com/restaurant/images/Rvw/162526/640x640_rect_162526653.jpg"
+           alt="窓からの緑道の景色とともに提供されるおやつセット"
+           loading="eager">
+      <img src="https://tblg.k-img.com/restaurant/images/Rvw/316529/640x640_rect_6eebc1dab18d1d2798a7dd76197bc954.jpg"
+           alt="抹茶白玉かき氷"
+           loading="eager">
+      <img src="https://tblg.k-img.com/restaurant/images/Rvw/316529/640x640_rect_25a545378d6677ae8d53e71c28dee5bd.jpg"
+           alt="2階カフェスペースと窓の桜の木"
+           loading="eager">
+    </div>
+    <div class="hero__bg" aria-hidden="true"></div>
+
+    <div class="hero__content">
+      <p class="hero__en-sub">Café Cha Dance · Nakameguro</p>
+      <h1 class="hero__title">
+        うつわカフェ<br>茶簞笥
+        <small>Café Cha Dance</small>
+      </h1>
+      <p class="hero__tagline">好きな器を選んで、<br>自分だけのお茶会を。</p>
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <span class="hero__scroll-line"></span>
+        <span>scroll</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== RIBBON ===== -->
+  <div class="ribbon" role="complementary" aria-label="店舗キャッチ">
+    中目黒 · 蛇崩川緑道沿い · 器と出会える、静かな一軒家カフェ
+  </div>
+
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery-section reveal" aria-labelledby="gallery-heading">
+    <div class="container">
+      <p class="section-label" id="gallery-heading" aria-label="ギャラリー">Gallery</p>
+
+      <div class="gallery-grid" role="list" aria-label="店内・料理写真">
+        <!-- Row 1: 2列 -->
+        <div class="gallery-grid__row gallery-grid__row--2" role="listitem">
+          <div class="gallery-item gallery-item--wide">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/162939/640x640_rect_27fed888da4341fb1a212eeb08bf47b0.jpg"
+                 alt="美しい器に盛られたおやつセット"
+                 loading="lazy">
+          </div>
+          <div class="gallery-item gallery-item--wide">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/316529/640x640_rect_680306904f60474a6738fe7d07cdb185.jpg"
+                 alt="お店の外観"
+                 loading="lazy">
+          </div>
+        </div>
+
+        <!-- Row 2: 3列 -->
+        <div class="gallery-grid__row gallery-grid__row--3" role="listitem">
+          <div class="gallery-item gallery-item--square">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/316529/640x640_rect_b0e7d8c1d79d7f93bda3db6d186a1478.jpg"
+                 alt="抹茶白玉かき氷の詳細"
+                 loading="lazy">
+          </div>
+          <div class="gallery-item gallery-item--square">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/316529/640x640_rect_b4acb611e5f6685226b33895c291ee92.jpg"
+                 alt="季節のスイーツ"
+                 loading="lazy">
+          </div>
+          <div class="gallery-item gallery-item--square">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/162524/640x640_rect_162524203.jpg"
+                 alt="靴を脱いで上がる店入口"
+                 loading="lazy">
+          </div>
+        </div>
+
+        <!-- Row 3: 1列 wide -->
+        <div class="gallery-grid__row gallery-grid__row--1" role="listitem">
+          <div class="gallery-item gallery-item--landscape">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/316529/640x640_rect_25a545378d6677ae8d53e71c28dee5bd.jpg"
+                 alt="桜の木を望む2階カフェスペース"
+                 loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-caption" aria-label="写真の注意書き">
+        <span>写真はすべて実際のお客様によるレビュー画像です</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== INTRO / FEATURES ===== -->
+  <section class="intro-section reveal" aria-labelledby="intro-heading">
+    <div class="container">
+      <p class="section-label" id="intro-heading">About</p>
+
+      <p class="intro-lead">
+        茶簞笥の中には、器がいっぱい。<br>
+        好みの一枚を選ぶところから、<br>お茶会がはじまります。
+      </p>
+
+      <ul class="feature-list" role="list">
+        <li class="feature-item reveal">
+          <div class="feature-icon" aria-hidden="true">🫖</div>
+          <div>
+            <p class="feature-title">器を選ぶ、特別なお茶会</p>
+            <p class="feature-body">
+              店内に並ぶ美しい器の中から、好みの一枚を選んでいただけます。
+              骨董・作家ものから世界各地の器まで、どれも店主が丁寧に選り集めた一品。
+              「今日はどの器にしようか」と迷う時間も、ここでは楽しみのひとつです。
+            </p>
+          </div>
+        </li>
+        <li class="feature-item reveal">
+          <div class="feature-icon" aria-hidden="true">🏡</div>
+          <div>
+            <p class="feature-title">自宅に招かれたような2階空間</p>
+            <p class="feature-body">
+              1階はうつわショップ。玄関で靴を脱ぎ、スリッパに履き替えて2階へ。
+              まるで誰かの家にお邪魔したような感覚の、こぢんまりとした温かな空間。
+              窓の外には緑道の桜並木が広がります。
+            </p>
+          </div>
+        </li>
+        <li class="feature-item reveal">
+          <div class="feature-icon" aria-hidden="true">🍃</div>
+          <div>
+            <p class="feature-title">京の餡と手作りスイーツ</p>
+            <p class="feature-body">
+              看板の「茶簞笥のお茶会セット」は、京都産の餡を使ったぜんざいやバスクチーズケーキなど、
+              季節の手作りおやつとドリンクのセット。
+              器の美しさと味のよさが重なって、ふだん以上においしく感じられます。
+            </p>
+          </div>
+        </li>
+        <li class="feature-item reveal">
+          <div class="feature-icon" aria-hidden="true">🌸</div>
+          <div>
+            <p class="feature-title">中目黒の隠れ家、緑道沿い</p>
+            <p class="feature-body">
+              中目黒駅から徒歩約5分。蛇崩川緑道の桜並木に面した一軒家カフェです。
+              駅の喧騒からほんの少し外れた場所にあるため、ゆっくり時間を過ごせます。
+              「穴場すぎる」という口コミも多数。
+            </p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="divider"><span class="divider__ornament">✦</span></div>
+    </div>
+  </section>
+
+
+  <!-- ===== SCENE ===== -->
+  <section class="scene-section reveal" aria-labelledby="scene-heading">
+    <div class="container">
+      <p class="section-label" id="scene-heading">どんなシーンで</p>
+
+      <div class="scene-grid" role="list">
+        <article class="scene-card reveal" role="listitem">
+          <div class="scene-card__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/162526/640x640_rect_162526653.jpg"
+                 alt="おひとりさまのカフェ時間"
+                 loading="lazy">
+          </div>
+          <div class="scene-card__body">
+            <p class="scene-card__title">おひとりさまの<br>ゆったりカフェ</p>
+            <p class="scene-card__text">本を持って、ただぼーっとしたい日に。</p>
+          </div>
+        </article>
+        <article class="scene-card reveal" role="listitem">
+          <div class="scene-card__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/162939/640x640_rect_27fed888da4341fb1a212eeb08bf47b0.jpg"
+                 alt="友人とのお茶時間"
+                 loading="lazy">
+          </div>
+          <div class="scene-card__body">
+            <p class="scene-card__title">友人と<br>おやつ会</p>
+            <p class="scene-card__text">器選びから話が弾みます。</p>
+          </div>
+        </article>
+
+        <!-- wide card -->
+        <article class="scene-card scene-card--wide reveal" role="listitem">
+          <div class="scene-card__img">
+            <img src="https://tblg.k-img.com/restaurant/images/Rvw/316529/640x640_rect_b0e7d8c1d79d7f93bda3db6d186a1478.jpg"
+                 alt="記念日や特別な日のお茶会"
+                 loading="lazy">
+          </div>
+          <div class="scene-card__body">
+            <p class="scene-card__title">記念日・特別な日</p>
+            <p class="scene-card__text">器をプレゼントにできるので、誕生日やアニバーサリーにも。<br>「あの日のあの器」が思い出になります。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="review-section reveal" aria-labelledby="review-heading">
+    <div class="container">
+      <p class="section-label" id="review-heading">口コミ</p>
+
+      <div class="rating-strip" aria-label="Google評価">
+        <span class="rating-number" aria-label="評価4.8">4.8</span>
+        <div class="rating-details">
+          <div class="rating-stars" aria-hidden="true">★★★★★</div>
+          <p class="rating-meta">Google マップ · 低品質レビュー率 0%</p>
+        </div>
+        <span class="rating-badge">中目黒カフェ 6位</span>
+      </div>
+    </div>
+
+    <div class="review-track" role="region" aria-label="お客様の声" aria-roledescription="カルーセル">
+      <div class="review-scroll">
+        <article class="review-card">
+          <div class="review-stars" aria-label="星5">★★★★★</div>
+          <p class="review-text">物語の世界に迷い込んだような素敵な和カフェ！好みの茶器を選んで自分だけのお茶会を。GW中日にうかがいましたが、なんとほぼ貸切状態で穴場スポットすぎる。</p>
+          <p class="review-author">— Yahoo!マップ レビューより</p>
+        </article>
+        <article class="review-card">
+          <div class="review-stars" aria-label="星5">★★★★★</div>
+          <p class="review-text">一軒家カフェで靴を脱いで2階に案内されました。たくさんの器に囲まれた席で、店主さんが器についても親切に説明してくださいます。また機会があれば違う器でいただきたいです。</p>
+          <p class="review-author">— 食べログ レビューより</p>
+        </article>
+        <article class="review-card">
+          <div class="review-stars" aria-label="星5">★★★★★</div>
+          <p class="review-text">Cafe Cha Dance feels more like stepping into someone's home than a typical café. Shoes left at the door, filled with antiques and pottery. The tea party set let me select my own cup — personal and thoughtful.</p>
+          <p class="review-author">— Google Maps review</p>
+        </article>
+        <article class="review-card">
+          <div class="review-stars" aria-label="星4">★★★★☆</div>
+          <p class="review-text">中目黒の路地裏で出会った茶箪笥は、大人のための休息場所。1階の器ショップを抜け、2階のカフェへ。日常の喧騒をふっと忘れさせてくれます。</p>
+          <p class="review-author">— 食べログ レビューより</p>
+        </article>
+        <article class="review-card">
+          <div class="review-stars" aria-label="星5">★★★★★</div>
+          <p class="review-text">Since we're sharing one big table, I enjoyed chatting with other guests. If you're lucky, you may see the owner who speaks fluent English. Enjoy this hidden gem in Nakameguro!</p>
+          <p class="review-author">— Google Maps review</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== INFO ===== -->
+  <section class="info-section reveal" aria-labelledby="info-heading">
+    <div class="container">
+      <p class="section-label" id="info-heading">店舗情報</p>
+
+      <div class="info-grid" role="table" aria-label="店舗の基本情報">
+        <div class="info-row" role="row">
+          <span class="info-label" role="rowheader">営業</span>
+          <div class="info-value" role="cell">
+            10:00 – 18:00<br>
+            <strong>定休日</strong>
+            要確認（訪問前にお電話を）
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-label" role="rowheader">アクセス</span>
+          <div class="info-value" role="cell">
+            東京都目黒区上目黒 2-46-10<br>
+            東急東横線 / 東京メトロ日比谷線<br>
+            <strong>中目黒駅</strong> 西口より徒歩 約5分<br>
+            蛇崩川緑道（桜並木）沿い
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-label" role="rowheader">価格帯</span>
+          <div class="info-value" role="cell">
+            ¥1,000 〜 ¥1,999<br>
+            <small style="color:#888; font-size:0.76rem;">茶簞笥のお茶会セット 1,650円〜</small>
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-label" role="rowheader">予約</span>
+          <div class="info-value" role="cell">
+            予約不可（当日来店のみ）
+            <span class="info-badge">全席禁煙</span>
+            <span class="info-badge">カード可</span>
+          </div>
+        </div>
+        <div class="info-row" role="row">
+          <span class="info-label" role="rowheader">電話</span>
+          <div class="info-value" role="cell">
+            <a href="tel:0367537019" style="color: var(--warm-deep); font-weight:600;">03-6753-7019</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== MAP CTA ===== -->
+  <section class="cta-section reveal" aria-labelledby="cta-heading">
+    <div class="container">
+      <p class="cta-eyebrow">Find us</p>
+      <h2 class="cta-heading" id="cta-heading">
+        中目黒で、<br>器と出会いに来てください。
+      </h2>
+      <p class="cta-sub">
+        蛇崩川緑道沿いの一軒家。<br>
+        Googleマップでルートをご確認ください。
+      </p>
+      <a href="https://maps.google.com/?cid=4886293058874782473"
+         target="_blank"
+         rel="noopener"
+         class="cta-map-btn"
+         aria-label="Googleマップでうつわカフェ茶簞笥を表示する">
+        <svg class="cta-map-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Googleマップで見る
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <p class="cta-tel">
+        お問い合わせは <a href="tel:0367537019">03-6753-7019</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer role="contentinfo">
+    <p class="footer-name">うつわカフェ茶簞笥 / Café Cha Dance</p>
+    <p>東京都目黒区上目黒 2-46-10</p>
+    <p>中目黒駅 西口より徒歩約5分</p>
+    <p style="margin-top:14px; font-size:0.65rem; opacity:0.4;">
+      このページは来店意思決定支援を目的として作成されました。<br>
+      営業時間や定休日は変更の場合がございます。訪問前にご確認ください。
+    </p>
+  </footer>
+
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    'use strict';
+
+    /* --- Intersection Observer: reveal on scroll --- */
+    (function() {
+      const targets = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              // Stagger siblings slightly
+              setTimeout(() => {
+                entry.target.classList.add('visible');
+              }, 60 * (i % 4));
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      targets.forEach(el => observer.observe(el));
+    })();
+
+
+    /* --- Hero: subtle parallax on scroll (only if no reduced motion) --- */
+    (function() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const heroBg = document.querySelector('.hero__photos');
+      if (!heroBg) return;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          heroBg.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+          ticking = false;
+        });
+        ticking = true;
+      }, { passive: true });
+    })();
+
+
+    /* --- Top bar shadow on scroll --- */
+    (function() {
+      const bar = document.querySelector('.top-bar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          bar.style.boxShadow = '0 2px 12px rgba(28,26,24,0.10)';
+        } else {
+          bar.style.boxShadow = 'none';
+        }
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
