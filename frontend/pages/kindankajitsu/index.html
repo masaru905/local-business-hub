@@ -1,40 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="中目黒の住宅街に佇く、地元同級生2人が作るフルーツサンド専門店。大田市場から当日朝に仕入れた旬のフルーツを、毎朝焼き上げた厚切りパンに挟んで。禁断果実 kindankajitsu。">
+  <meta name="description"
+    content="中目黒の住宅街に佇く、地元同級生2人が作るフルーツサンド専門店。大田市場から当日朝に仕入れた旬のフルーツを、毎朝焼き上げた厚切りパンに挟んで。禁断果実 kindankajitsu。">
   <title>禁断果実 | kindankajitsu — 中目黒のフルーツサンド専門店</title>
 
   <style>
     /* ===== RESET ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    img { display: block; max-width: 100%; height: auto; }
-    a { color: inherit; text-decoration: none; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     /* ===== VARIABLES ===== */
     :root {
-      --black:      #0d0c0b;
-      --charcoal:   #1a1917;
-      --dark-mid:   #2c2a27;
-      --gold:       #c8a24a;
+      --black: #0d0c0b;
+      --charcoal: #1a1917;
+      --dark-mid: #2c2a27;
+      --gold: #c8a24a;
       --gold-light: #e8c97a;
-      --red:        #c23b2a;
-      --cream:      #f5f0e8;
-      --white:      #ffffff;
+      --red: #c23b2a;
+      --cream: #f5f0e8;
+      --white: #ffffff;
       --text-muted: #888880;
 
-      --fs-xs:   0.70rem;
-      --fs-sm:   0.865rem;
+      --fs-xs: 0.70rem;
+      --fs-sm: 0.865rem;
       --fs-base: 1rem;
-      --fs-md:   1.15rem;
-      --fs-lg:   1.5rem;
+      --fs-md: 1.15rem;
+      --fs-lg: 1.5rem;
       --fs-hero: clamp(3rem, 11vw, 6.5rem);
 
-      --radius-sm:   4px;
-      --radius-md:   10px;
-      --radius-lg:   20px;
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 20px;
       --radius-pill: 999px;
 
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,6 +86,7 @@
       gap: 12px;
       margin-bottom: 1.2rem;
     }
+
     .label::before {
       content: '';
       width: 24px;
@@ -79,30 +101,38 @@
       transform: translateY(24px);
       transition: opacity 0.65s ease, transform 0.65s ease;
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ===== TOP BAR ===== */
     .topbar {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
-      background: rgba(13,12,11,0.9);
+      background: rgba(13, 12, 11, 0.9);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(200,162,74,0.18);
+      border-bottom: 1px solid rgba(200, 162, 74, 0.18);
       transition: box-shadow var(--transition);
     }
+
     .topbar__logo {
       font-size: var(--fs-sm);
       letter-spacing: 0.14em;
       color: var(--gold);
       font-weight: 500;
     }
+
     .topbar__cta {
       display: flex;
       align-items: center;
@@ -116,7 +146,10 @@
       border-radius: var(--radius-pill);
       transition: background var(--transition);
     }
-    .topbar__cta:active { background: var(--gold-light); }
+
+    .topbar__cta:active {
+      background: var(--gold-light);
+    }
 
     /* ===== HERO ===== */
     .hero {
@@ -137,19 +170,28 @@
       gap: 2px;
       min-height: 55svh;
     }
+
     .hero__visual img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       filter: brightness(0.82) contrast(1.08) saturate(1.1);
     }
-    .hero__visual img:first-child { grid-row: span 2; }
-    .hero__visual img:last-child { filter: brightness(0.72) contrast(1.1); }
+
+    .hero__visual img:first-child {
+      grid-row: span 2;
+    }
+
+    .hero__visual img:last-child {
+      filter: brightness(0.72) contrast(1.1);
+    }
 
     /* diagonal slash overlay */
     .hero__slash {
       position: absolute;
       bottom: 38%;
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       height: 80px;
       background: var(--black);
       clip-path: polygon(0 100%, 100% 0, 100% 100%);
@@ -172,6 +214,7 @@
       align-items: center;
       gap: 10px;
     }
+
     .hero__eyebrow::before {
       content: '🍎';
       font-size: 0.9rem;
@@ -187,6 +230,7 @@
       margin-bottom: 20px;
       text-transform: uppercase;
     }
+
     .hero__title span {
       display: block;
       color: var(--gold);
@@ -199,7 +243,7 @@
     .hero__tagline {
       font-size: var(--fs-sm);
       line-height: 1.8;
-      color: rgba(245,240,232,0.72);
+      color: rgba(245, 240, 232, 0.72);
       margin-bottom: 28px;
       max-width: 28ch;
     }
@@ -209,11 +253,12 @@
       gap: 8px;
       flex-wrap: wrap;
     }
+
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      border: 1px solid rgba(200,162,74,0.4);
+      border: 1px solid rgba(200, 162, 74, 0.4);
       color: var(--gold-light);
       font-size: var(--fs-xs);
       letter-spacing: 0.08em;
@@ -232,6 +277,7 @@
       letter-spacing: 0.1em;
       line-height: 1.6;
     }
+
     .hook em {
       font-style: normal;
       font-size: 1.15em;
@@ -242,39 +288,68 @@
       padding: 56px 0 40px;
       background: var(--charcoal);
     }
+
     .gallery__grid {
       display: flex;
       flex-direction: column;
       gap: 3px;
     }
+
     .gallery__row {
       display: grid;
       gap: 3px;
     }
-    .gallery__row--2col   { grid-template-columns: 1fr 1fr; }
-    .gallery__row--3col   { grid-template-columns: 1fr 1fr 1fr; }
-    .gallery__row--wide   { grid-template-columns: 2fr 1fr; }
-    .gallery__row--1col   { grid-template-columns: 1fr; }
+
+    .gallery__row--2col {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery__row--3col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .gallery__row--wide {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .gallery__row--1col {
+      grid-template-columns: 1fr;
+    }
 
     .gallery__item {
       overflow: hidden;
       background: var(--dark-mid);
     }
+
     .gallery__item img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 0.5s ease, filter 0.3s ease;
       filter: brightness(0.9) saturate(1.1);
     }
+
     .gallery__item:hover img {
       transform: scale(1.05);
       filter: brightness(1) saturate(1.2);
     }
-    .gallery__item--sq   { aspect-ratio: 1; }
-    .gallery__item--tall { aspect-ratio: 3/4; }
-    .gallery__item--wide { aspect-ratio: 4/3; }
-    .gallery__item--land { aspect-ratio: 16/9; }
+
+    .gallery__item--sq {
+      aspect-ratio: 1;
+    }
+
+    .gallery__item--tall {
+      aspect-ratio: 3/4;
+    }
+
+    .gallery__item--wide {
+      aspect-ratio: 4/3;
+    }
+
+    .gallery__item--land {
+      aspect-ratio: 16/9;
+    }
 
     .gallery__note {
       margin-top: 18px;
@@ -289,13 +364,15 @@
       padding: 72px 0 60px;
       background: var(--black);
     }
+
     .story__lead {
       font-size: clamp(1.1rem, 4vw, 1.35rem);
       line-height: 1.9;
       letter-spacing: 0.02em;
-      color: rgba(245,240,232,0.88);
+      color: rgba(245, 240, 232, 0.88);
       margin-bottom: 48px;
     }
+
     .story__lead strong {
       color: var(--gold-light);
       font-weight: 600;
@@ -306,24 +383,29 @@
       flex-direction: column;
       gap: 0;
     }
+
     .point {
       display: grid;
       grid-template-columns: 56px 1fr;
       gap: 0;
-      border-top: 1px solid rgba(200,162,74,0.15);
+      border-top: 1px solid rgba(200, 162, 74, 0.15);
       padding: 24px 0;
     }
-    .point:last-child { border-bottom: 1px solid rgba(200,162,74,0.15); }
+
+    .point:last-child {
+      border-bottom: 1px solid rgba(200, 162, 74, 0.15);
+    }
+
     .point__num {
       font-size: 2.2rem;
       font-weight: 800;
-      color: rgba(200,162,74,0.22);
+      color: rgba(200, 162, 74, 0.22);
       line-height: 1;
       padding-top: 3px;
       letter-spacing: -0.03em;
       font-variant-numeric: tabular-nums;
     }
-    .point__body {}
+
     .point__title {
       font-size: var(--fs-base);
       font-weight: 700;
@@ -331,9 +413,10 @@
       margin-bottom: 6px;
       letter-spacing: 0.04em;
     }
+
     .point__text {
       font-size: var(--fs-sm);
-      color: rgba(245,240,232,0.65);
+      color: rgba(245, 240, 232, 0.65);
       line-height: 1.8;
     }
 
@@ -342,34 +425,47 @@
       padding: 56px 0 60px;
       background: var(--charcoal);
     }
+
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-top: 28px;
     }
+
     .menu-card {
       background: var(--dark-mid);
       border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid rgba(200,162,74,0.12);
+      border: 1px solid rgba(200, 162, 74, 0.12);
       transition: border-color var(--transition), transform var(--transition);
     }
+
     .menu-card:hover {
-      border-color: rgba(200,162,74,0.4);
+      border-color: rgba(200, 162, 74, 0.4);
       transform: translateY(-3px);
     }
+
     .menu-card__img {
       aspect-ratio: 1;
       overflow: hidden;
     }
+
     .menu-card__img img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
-    .menu-card:hover .menu-card__img img { transform: scale(1.06); }
-    .menu-card__body { padding: 14px 14px 16px; }
+
+    .menu-card:hover .menu-card__img img {
+      transform: scale(1.06);
+    }
+
+    .menu-card__body {
+      padding: 14px 14px 16px;
+    }
+
     .menu-card__name {
       font-size: var(--fs-sm);
       font-weight: 700;
@@ -377,11 +473,13 @@
       margin-bottom: 4px;
       letter-spacing: 0.03em;
     }
+
     .menu-card__desc {
       font-size: 0.76rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
+
     .menu-card__price {
       margin-top: 8px;
       font-size: var(--fs-xs);
@@ -409,12 +507,14 @@
       padding: 56px 0 60px;
       background: var(--black);
     }
+
     .scene-list {
       display: flex;
       flex-direction: column;
       gap: 14px;
       margin-top: 28px;
     }
+
     .scene-item {
       display: grid;
       grid-template-columns: 100px 1fr;
@@ -423,26 +523,34 @@
       background: var(--charcoal);
       border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid rgba(200,162,74,0.1);
+      border: 1px solid rgba(200, 162, 74, 0.1);
     }
+
     .scene-item__img {
       height: 100px;
       overflow: hidden;
     }
+
     .scene-item__img img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
-    .scene-item__body { padding: 14px 16px 14px 0; }
+
+    .scene-item__body {
+      padding: 14px 16px 14px 0;
+    }
+
     .scene-item__title {
       font-size: var(--fs-sm);
       font-weight: 700;
       color: var(--gold-light);
       margin-bottom: 4px;
     }
+
     .scene-item__text {
       font-size: 0.78rem;
-      color: rgba(245,240,232,0.55);
+      color: rgba(245, 240, 232, 0.55);
       line-height: 1.65;
     }
 
@@ -451,18 +559,23 @@
       padding: 56px 0;
       background: var(--charcoal);
     }
+
     .review-scroll-wrap {
       position: relative;
       margin-top: 24px;
     }
+
     .review-scroll-wrap::after {
       content: '';
       position: absolute;
-      right: 0; top: 0;
-      width: 48px; height: 100%;
+      right: 0;
+      top: 0;
+      width: 48px;
+      height: 100%;
       background: linear-gradient(to right, transparent, var(--charcoal));
       pointer-events: none;
     }
+
     .review-scroll {
       display: flex;
       gap: 14px;
@@ -472,36 +585,62 @@
       padding-bottom: 10px;
       scrollbar-width: none;
     }
-    .review-scroll::-webkit-scrollbar { display: none; }
+
+    .review-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
     .review-card {
       flex: 0 0 min(78vw, 270px);
       scroll-snap-align: start;
       background: var(--dark-mid);
       border-radius: var(--radius-md);
       padding: 18px 16px;
-      border: 1px solid rgba(200,162,74,0.15);
+      border: 1px solid rgba(200, 162, 74, 0.15);
     }
-    .review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 10px; }
-    .review-text { font-size: var(--fs-sm); color: rgba(245,240,232,0.72); line-height: 1.75; }
-    .review-author { margin-top: 12px; font-size: var(--fs-xs); color: var(--gold); letter-spacing: 0.1em; }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .review-text {
+      font-size: var(--fs-sm);
+      color: rgba(245, 240, 232, 0.72);
+      line-height: 1.75;
+    }
+
+    .review-author {
+      margin-top: 12px;
+      font-size: var(--fs-xs);
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
 
     /* ===== INFO ===== */
     .info-section {
       padding: 56px 0 60px;
       background: var(--black);
     }
+
     .info-table {
       margin-top: 28px;
-      border: 1px solid rgba(200,162,74,0.2);
+      border: 1px solid rgba(200, 162, 74, 0.2);
       border-radius: var(--radius-md);
       overflow: hidden;
     }
+
     .info-row {
       display: grid;
       grid-template-columns: 80px 1fr;
-      border-bottom: 1px solid rgba(200,162,74,0.12);
+      border-bottom: 1px solid rgba(200, 162, 74, 0.12);
     }
-    .info-row:last-child { border-bottom: none; }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
     .info-key {
       background: var(--charcoal);
       padding: 16px 12px;
@@ -510,24 +649,32 @@
       color: var(--gold);
       font-weight: 700;
       text-transform: uppercase;
-      border-right: 1px solid rgba(200,162,74,0.12);
+      border-right: 1px solid rgba(200, 162, 74, 0.12);
       display: flex;
       align-items: flex-start;
       padding-top: 18px;
     }
+
     .info-val {
       background: var(--dark-mid);
       padding: 16px 16px;
       font-size: var(--fs-sm);
-      color: rgba(245,240,232,0.8);
+      color: rgba(245, 240, 232, 0.8);
       line-height: 1.75;
     }
-    .info-val small { display: block; color: var(--text-muted); font-size: var(--fs-xs); margin-top: 3px; }
+
+    .info-val small {
+      display: block;
+      color: var(--text-muted);
+      font-size: var(--fs-xs);
+      margin-top: 3px;
+    }
+
     .chip {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      border: 1px solid rgba(200,162,74,0.35);
+      border: 1px solid rgba(200, 162, 74, 0.35);
       color: var(--gold-light);
       font-size: var(--fs-xs);
       padding: 3px 10px;
@@ -543,7 +690,7 @@
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       padding: 12px 16px;
       font-size: var(--fs-xs);
-      color: rgba(245,240,232,0.65);
+      color: rgba(245, 240, 232, 0.65);
       line-height: 1.7;
     }
 
@@ -553,6 +700,7 @@
       background: var(--charcoal);
       text-align: center;
     }
+
     .cta__overline {
       font-size: var(--fs-xs);
       letter-spacing: 0.28em;
@@ -560,6 +708,7 @@
       color: var(--gold);
       margin-bottom: 18px;
     }
+
     .cta__heading {
       font-size: clamp(1.6rem, 6vw, 2.4rem);
       font-weight: 800;
@@ -568,16 +717,19 @@
       margin-bottom: 12px;
       letter-spacing: -0.01em;
     }
+
     .cta__heading em {
       font-style: normal;
       color: var(--gold);
     }
+
     .cta__sub {
       font-size: var(--fs-sm);
       color: var(--text-muted);
       margin-bottom: 36px;
       line-height: 1.7;
     }
+
     .cta__btn {
       display: inline-flex;
       align-items: center;
@@ -591,43 +743,62 @@
       padding: 17px 36px;
       border-radius: var(--radius-pill);
       transition: background var(--transition), transform var(--transition);
-      box-shadow: 0 4px 24px rgba(200,162,74,0.28);
+      box-shadow: 0 4px 24px rgba(200, 162, 74, 0.28);
       width: 100%;
       max-width: 320px;
     }
-    .cta__btn:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .cta__btn:active { transform: translateY(0); }
+
+    .cta__btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .cta__btn:active {
+      transform: translateY(0);
+    }
+
     .cta__tel {
       margin-top: 20px;
       font-size: var(--fs-sm);
       color: var(--text-muted);
     }
-    .cta__tel a { color: var(--gold); }
+
+    .cta__tel a {
+      color: var(--gold);
+    }
 
     /* ===== FOOTER ===== */
     footer {
       background: var(--black);
-      border-top: 1px solid rgba(200,162,74,0.12);
+      border-top: 1px solid rgba(200, 162, 74, 0.12);
       padding: 32px 20px;
       text-align: center;
       font-size: var(--fs-xs);
-      color: rgba(245,240,232,0.3);
+      color: rgba(245, 240, 232, 0.3);
       letter-spacing: 0.1em;
       line-height: 2;
     }
-    footer .fn { color: rgba(245,240,232,0.65); font-size: var(--fs-sm); margin-bottom: 4px; }
+
+    footer .fn {
+      color: rgba(245, 240, 232, 0.65);
+      font-size: var(--fs-sm);
+      margin-bottom: 4px;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- TOP BAR -->
   <header class="topbar" role="banner">
     <span class="topbar__logo">禁断果実</span>
-    <a href="https://maps.google.com/?cid=2472637044580109121"
-       target="_blank" rel="noopener"
-       class="topbar__cta"
-       aria-label="Googleマップで見る">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <a href="https://maps.google.com/?cid=2472637044580109121" target="_blank" rel="noopener" class="topbar__cta"
+      aria-label="Googleマップで見る">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
       地図を見る
     </a>
   </header>
@@ -637,11 +808,11 @@
   <section class="hero" aria-label="ファーストビュー">
     <div class="hero__visual" aria-hidden="true">
       <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_ec60f1fd8f706badbf07b37905fe9836.jpg"
-           alt="フルーツサンドの断面" loading="eager">
+        alt="フルーツサンドの断面" loading="eager">
       <img src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_6337d3532f9922ff36660cc5bf1295b3.jpg"
-           alt="カフェラテ" loading="eager">
+        alt="カフェラテ" loading="eager">
       <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_da11007c86801236ede7a45eb7a93342.jpg"
-           alt="店内の様子" loading="eager">
+        alt="店内の様子" loading="eager">
     </div>
     <div class="hero__slash" aria-hidden="true"></div>
     <div class="hero__content">
@@ -678,32 +849,38 @@
     <div class="gallery__grid" role="list" aria-label="メニュー・店内写真">
       <div class="gallery__row gallery__row--2col" role="listitem">
         <div class="gallery__item gallery__item--wide">
-          <img src="https://tblg.k-img.com/restaurant/images/Rvw/304291/640x640_rect_c4aaa6722c0eb298aa700ec993bbd411.jpg"
-               alt="ミックスフルーツサンド" loading="lazy">
+          <img
+            src="https://tblg.k-img.com/restaurant/images/Rvw/304291/640x640_rect_c4aaa6722c0eb298aa700ec993bbd411.jpg"
+            alt="ミックスフルーツサンド" loading="lazy">
         </div>
         <div class="gallery__item gallery__item--wide">
-          <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_1e4454dd0b23a7e2d23617d901df6c21.jpg"
-               alt="フルーツサンドの断面アップ" loading="lazy">
+          <img
+            src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_1e4454dd0b23a7e2d23617d901df6c21.jpg"
+            alt="フルーツサンドの断面アップ" loading="lazy">
         </div>
       </div>
       <div class="gallery__row gallery__row--3col" role="listitem">
         <div class="gallery__item gallery__item--sq">
-          <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_919cfcf954546bb7bb24422793e656c3.jpg"
-               alt="ホットサンド" loading="lazy">
+          <img
+            src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_919cfcf954546bb7bb24422793e656c3.jpg"
+            alt="ホットサンド" loading="lazy">
         </div>
         <div class="gallery__item gallery__item--sq">
-          <img src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_fbb4389430f2f7518256d53b62562932.jpg"
-               alt="コーヒー" loading="lazy">
+          <img
+            src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_fbb4389430f2f7518256d53b62562932.jpg"
+            alt="コーヒー" loading="lazy">
         </div>
         <div class="gallery__item gallery__item--sq">
-          <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_093ab29b3dc3c1e48d7f9a0589cf5703.jpg"
-               alt="サンドイッチと飲み物のセット" loading="lazy">
+          <img
+            src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_093ab29b3dc3c1e48d7f9a0589cf5703.jpg"
+            alt="サンドイッチと飲み物のセット" loading="lazy">
         </div>
       </div>
       <div class="gallery__row gallery__row--1col" role="listitem">
         <div class="gallery__item gallery__item--land">
-          <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_2c6cf6e4a9e25e87f670a14b6e21a78c.jpg"
-               alt="黒を基調とした店内" loading="lazy">
+          <img
+            src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_2c6cf6e4a9e25e87f670a14b6e21a78c.jpg"
+            alt="黒を基調とした店内" loading="lazy">
         </div>
       </div>
     </div>
@@ -766,8 +943,9 @@
       <div class="menu-grid" role="list" aria-label="主要メニュー">
         <article class="menu-card menu-card--hot reveal" role="listitem">
           <div class="menu-card__img">
-            <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_0f4cdaea655ef21d7f2686774266690d.jpg"
-                 alt="禁断果実フルーツサンド" loading="lazy">
+            <img
+              src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_0f4cdaea655ef21d7f2686774266690d.jpg"
+              alt="禁断果実フルーツサンド" loading="lazy">
           </div>
           <div class="menu-card__body">
             <p class="menu-card__name">禁断果実フルーツサンド</p>
@@ -777,8 +955,9 @@
         </article>
         <article class="menu-card reveal" role="listitem">
           <div class="menu-card__img">
-            <img src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_919cfcf954546bb7bb24422793e656c3.jpg"
-                 alt="ホットサンド エルビス" loading="lazy">
+            <img
+              src="https://tblg.k-img.com/restaurant/images/Rvw/225681/640x640_rect_919cfcf954546bb7bb24422793e656c3.jpg"
+              alt="ホットサンド エルビス" loading="lazy">
           </div>
           <div class="menu-card__body">
             <p class="menu-card__name">ホットサンド</p>
@@ -789,7 +968,7 @@
         <article class="menu-card reveal" role="listitem">
           <div class="menu-card__img">
             <img src="https://tblg.k-img.com/restaurant/images/Rvw/241173/640x640_b1db303ad639236b4b0c83b0ccb9cca2.jpg"
-                 alt="Kindan Pudding" loading="lazy">
+              alt="Kindan Pudding" loading="lazy">
           </div>
           <div class="menu-card__body">
             <p class="menu-card__name">Kindan Pudding</p>
@@ -799,8 +978,9 @@
         </article>
         <article class="menu-card reveal" role="listitem">
           <div class="menu-card__img">
-            <img src="https://tblg.k-img.com/restaurant/images/Rvw/303534/640x640_rect_10ec3d6eb9521fce885a2ab0833b60cc.jpg"
-                 alt="チキンオーバーライス" loading="lazy">
+            <img
+              src="https://tblg.k-img.com/restaurant/images/Rvw/303534/640x640_rect_10ec3d6eb9521fce885a2ab0833b60cc.jpg"
+              alt="チキンオーバーライス" loading="lazy">
           </div>
           <div class="menu-card__body">
             <p class="menu-card__name">チキンオーバーライス</p>
@@ -820,8 +1000,9 @@
       <ul class="scene-list" role="list">
         <li class="scene-item reveal" role="listitem">
           <div class="scene-item__img">
-            <img src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_6337d3532f9922ff36660cc5bf1295b3.jpg"
-                 alt="モーニングコーヒー" loading="lazy">
+            <img
+              src="https://tblg.k-img.com/restaurant/images/Rvw/356595/640x640_rect_6337d3532f9922ff36660cc5bf1295b3.jpg"
+              alt="モーニングコーヒー" loading="lazy">
           </div>
           <div class="scene-item__body">
             <p class="scene-item__title">🕗 出勤前の朝ごはん</p>
@@ -830,8 +1011,9 @@
         </li>
         <li class="scene-item reveal" role="listitem">
           <div class="scene-item__img">
-            <img src="https://tblg.k-img.com/restaurant/images/Rvw/300808/640x640_rect_565941384b6a1e62b1ff67e6ce9b752a.jpg"
-                 alt="テイクアウトサンド" loading="lazy">
+            <img
+              src="https://tblg.k-img.com/restaurant/images/Rvw/300808/640x640_rect_565941384b6a1e62b1ff67e6ce9b752a.jpg"
+              alt="テイクアウトサンド" loading="lazy">
           </div>
           <div class="scene-item__body">
             <p class="scene-item__title">🥡 公園でテイクアウト</p>
@@ -840,8 +1022,9 @@
         </li>
         <li class="scene-item reveal" role="listitem">
           <div class="scene-item__img">
-            <img src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_fb87539a654cfe40be961ef0ee12a0f0.jpg"
-                 alt="電源でリモートワーク" loading="lazy">
+            <img
+              src="https://tblg.k-img.com/restaurant/images/Rvw/325576/640x640_rect_fb87539a654cfe40be961ef0ee12a0f0.jpg"
+              alt="電源でリモートワーク" loading="lazy">
           </div>
           <div class="scene-item__body">
             <p class="scene-item__title">💻 ちょっとした作業に</p>
@@ -872,7 +1055,8 @@
         </article>
         <article class="review-card">
           <div class="review-stars" aria-label="星5">★★★★★</div>
-          <p class="review-text">Kindan Pudding ¥500 と Cafe Latte ¥600 で朝のひとときを。電子マネーも使えて便利。黒い外観がかっこよくて、一人でも入りやすい雰囲気。</p>
+          <p class="review-text">Kindan Pudding ¥500 と Cafe Latte ¥600 で朝のひとときを。電子マネーも使えて便利。黒い外観がかっこよくて、一人でも入りやすい雰囲気。
+          </p>
           <p class="review-author">— 食べログ レビューより</p>
         </article>
         <article class="review-card">
@@ -957,13 +1141,20 @@
         大田市場から届いた旬のフルーツは、<br>
         その日の朝だけのもの。
       </p>
-      <a href="https://maps.google.com/?cid=2472637044580109121"
-         target="_blank" rel="noopener"
-         class="cta__btn"
-         aria-label="Googleマップで禁断果実を表示する">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <a href="https://maps.google.com/?cid=2472637044580109121" target="_blank" rel="noopener" class="cta__btn"
+        aria-label="Googleマップで禁断果実を表示する">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
         Googleマップで見る
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <polyline points="15 3 21 3 21 9" />
+          <line x1="10" y1="14" x2="21" y2="3" />
+        </svg>
       </a>
       <p class="cta__tel">お問い合わせ <a href="tel:08023498056">080-2349-8056</a></p>
     </div>
@@ -985,7 +1176,7 @@
     'use strict';
 
     // reveal on scroll
-    (function() {
+    (function () {
       const els = document.querySelectorAll('.reveal');
       const obs = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
@@ -999,7 +1190,7 @@
     })();
 
     // topbar shadow
-    (function() {
+    (function () {
       const bar = document.querySelector('.topbar');
       window.addEventListener('scroll', () => {
         bar.style.boxShadow = window.scrollY > 30
@@ -1009,4 +1200,5 @@
     })();
   </script>
 </body>
+
 </html>
